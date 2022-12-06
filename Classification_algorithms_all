@@ -1,0 +1,21 @@
+While performing any ML classification problem we have to try and apply multiple ML algorithm to check which model is giving us the good sort of accuracy.
+
+In this notebook we have performed a short and effective method which will save your time for cross validation so that you can spend more time on the model configuration or Hyper-Parameter Tuning.
+
+
+# Run all classification models at a time.
+from lazypredict.Supervised import LazyClassifier
+#sklearn prebuilt dataset
+from sklearn.datasets import load_breast_cancer
+from sklearn.model_selection import train_test_split
+data = load_breast_cancer()
+x = data.data
+y = data.target
+#splitting the data
+x_train,x_test,y_train,y_test = train_test_split(x,y,test_size = 0.3,random_state = 42)
+
+clf = LazyClassifier(verbose = 0, ignore_warnings =True, custom_metric = None)
+
+models,predictions = clf.fit(x_train,x_test,y_train,y_test)
+#getting the outputs
+print(models)
